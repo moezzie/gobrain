@@ -65,7 +65,7 @@ ff.Update(inputs)
 the output will be a vector with values ranging from `0` to `1`.
 
 ### Serialization
-Saving a network to disk/database/etc for later reuse can be bery useful. 
+Saving a network to disk/database/etc for later reuse can be very useful. 
 Just serialize the network using the Serialize() method
 
 ```go
