@@ -73,7 +73,7 @@ func TestSerialize(t *testing.T) {
     // use true in the last parameter to receive reports about the learning error
     ff.Train(patterns, 10, 0.6, 0.4, false)
 
-    // Serialize the newly trained network to disk
+    // Serialize the newly trained network to json
     serialized, err := ff.Serialize()
     if err != nil {
         t.Error("Serialization failed")

@@ -54,26 +54,6 @@ func (nn *FeedForward) Init(inputs, hiddens, outputs int) {
 	nn.OutputChanges = matrix(nn.NHiddens, nn.NOutputs)
 }
 
-func (nn *FeedForward) Serialize() ([]byte, error) {
-
-	data, err := json.Marshal(nn)
-	if err != nil {
-		return make([]byte,0), err
-	}
-
-	return data, err
-}
-
-func (nn *FeedForward) Load(data []byte) error {
-
-	err := json.Unmarshal(data, nn)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // Set the number of contexts to add to the network. By default the network do not have any context
 // so it is a simple Feed Forward network. When contexts are added the network behaves like an Elman's
 // SRN (simple recurrent networks). The first parameter (nContexts) is used to indicate the number of contexts to be used.
@@ -215,4 +195,27 @@ func (nn *FeedForward) Test(patterns [][][]float64) {
 	for _, p := range patterns {
 		fmt.Println(p[0], "->", nn.Update(p[0]), " : ", p[1])
 	}
+}
+
+// Serializes a networks current state to json.
+// This can later be saved to file, db or other kind of storage
+func (nn *FeedForward) Serialize() ([]byte, error) {
+
+	data, err := json.Marshal(nn)
+	if err != nil {
+		return make([]byte,0), err
+	}
+
+	return data, err
+}
+
+// Load a previously serialized network fron json
+func (nn *FeedForward) Load(data []byte) error {
+
+	err := json.Unmarshal(data, nn)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
