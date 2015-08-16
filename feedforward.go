@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"encoding/json"
 )
 
 // FeedForwad struct is used to represent a simple neural network
@@ -51,6 +52,26 @@ func (nn *FeedForward) Init(inputs, hiddens, outputs int) {
 
 	nn.InputChanges = matrix(nn.NInputs, nn.NHiddens)
 	nn.OutputChanges = matrix(nn.NHiddens, nn.NOutputs)
+}
+
+func (nn *FeedForward) Serialize() ([]byte, error) {
+
+	data, err := json.Marshal(nn)
+	if err != nil {
+		return make([]byte,0), err
+	}
+
+	return data, err
+}
+
+func (nn *FeedForward) Load(data []byte) error {
+
+	err := json.Unmarshal(data, nn)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Set the number of contexts to add to the network. By default the network do not have any context
