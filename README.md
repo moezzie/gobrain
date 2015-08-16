@@ -64,9 +64,25 @@ ff.Update(inputs)
 
 the output will be a vector with values ranging from `0` to `1`.
 
+### Serialization
+Saving a network to disk/database/etc for later reuse can be bery useful. 
+Just serialize the network using the Serialize() method
+
+```go
+serialized, err := ff.Serialize()
+```
+
+To later recreate the same network to its original state use the Load() method
+
+```go
+ff := &FeedForward{}
+err := ff.Load(serialized)
+```
+
 ## Recurrent Neural Network
 
 
 ## Changelog
 * 1.0.0 - Added Feed Forward Neural Network with contexts from Elman RNN
+* 1.1.0 - Added the ability to serialize and deserialize trained networks
 
